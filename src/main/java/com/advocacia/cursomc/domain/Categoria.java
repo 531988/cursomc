@@ -1,4 +1,4 @@
-package com.advocacia.domain;
+package com.advocacia.cursomc.domain;
 
 import java.io.Serializable;
 
