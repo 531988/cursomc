@@ -23,10 +23,10 @@ public class ClienteResource {
 	private ClienteService service;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Optional<Cliente>> find(@PathVariable Integer id) {
 		Optional<Cliente> obj = null;
 		try {
-			obj = service.buscar(id);
+			obj = service.find(id);
 		} catch (ObjectNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
