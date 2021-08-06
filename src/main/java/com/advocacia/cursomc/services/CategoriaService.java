@@ -2,10 +2,12 @@ package com.advocacia.cursomc.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.advocacia.cursomc.domain.Categoria;
 import com.advocacia.cursomc.repositories.CategoriaRepository;
+import com.advocacia.cursomc.services.exceptions.DataIntegrityException;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 
@@ -31,5 +33,21 @@ public class CategoriaService {
 	public Categoria update(Categoria obj) {
 		obj.getId();
 		return repo.save(obj);
+	}
+	
+	public void delete(Integer id) {
+		try {
+			find(id);
+		} catch (ObjectNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			repo.deleteById(id);
+			
+		} catch (DataIntegrityViolationException e) {
+		throw new DataIntegrityException("Não é possível excluir uma categoria que possiu produto ");
+		}
+		
 	}
 }
