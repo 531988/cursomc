@@ -1,4 +1,5 @@
 package com.advocacia.cursomc.services;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,7 @@ public class CategoriaService {
 		Optional<Categoria> obj = repo.findById(id);
 		if (obj == null) {
 			throw new ObjectNotFoundException("Objeto não encontrado! Id" + id+ ", Tipo " + Categoria.class.getName());
-		}
-	return obj;	
+		}return obj;	
 	}
 
 	public Categoria insert(Categoria obj) {
@@ -49,5 +49,8 @@ public class CategoriaService {
 		throw new DataIntegrityException("Não é possível excluir uma categoria que possiu produto ");
 		}
 		
+	}
+	public List<Categoria> findAll(){
+		return repo.findAll();
 	}
 }
